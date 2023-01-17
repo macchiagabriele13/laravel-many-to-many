@@ -29,6 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'difficulty' => 'required',
             'languages' => 'required',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id',
         ];
     }
     public function messages()

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Technology;
 use App\Models\Type;
 
 class ProjectController extends Controller
@@ -29,8 +30,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all(); //👈 get all types
+        $technologies = Technology::all(); //👈 get all tags
         //dd($categories);
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -46,6 +48,11 @@ class ProjectController extends Controller
         $val_data['slug'] = $project_slug;
         $project = Project::create($val_data);
 
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($val_data['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
 
         return to_route('admin.projects.index')->with('message', "$project->title added succesfully");
     }
