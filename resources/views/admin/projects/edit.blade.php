@@ -6,7 +6,7 @@
     <h1 class="py-5"> Update project: {{$project->title}}</h1>
     @include('partials.error')
 
-    <form action="{{route('admin.projects.update', $project->slug)}}" method="post" class="card p-3">
+    <form action="{{route('admin.projects.update', $project->slug)}}" method="post" class="card p-3" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -19,11 +19,7 @@
             <input type="text" name="difficulty" id="difficulty" class="form-control @error('difficulty') is-invalid @enderror" placeholder="batman vol-2 (joker)" aria-describedby="difficultyHlper" value="{{$project->difficulty}}">
             <small id="difficultyHlper" class="text-muted">Add the project difficulty here</small>
         </div>
-        <div class="mb-3">
-            <label for="languages" class="form-label">languages</label>
-            <input type="text" name="languages" id="languages" class="form-control @error('languages') is-invalid @enderror" placeholder="12.20" aria-describedby="languagesHlper" value="{{ $project->languages}}">
-            <small id="languagesHlper" class="text-muted">Add the project languages here</small>
-        </div>
+    
         <div class="mb-3">
             <label for="languages" class="form-label">languages</label>
             <input type="text" name="languages" id="languages" class="form-control @error('languages') is-invalid @enderror" placeholder="12.20" aria-describedby="languagesHlper" value="{{$project->languages}}">
@@ -73,6 +69,16 @@
             </select>
         </div>
 
+
+        <div class="form-group">
+            <label for="cover_image"> Image</label>
+            <img width="100" src="{{asset('storage/'. $project->cover_image)}}" alt="">
+            <input type="file" class="form-control-file" name="cover_image" id="cover_image" placeholder="Add a cover image" aria-describedby="coverImgHelper">
+            <small id="coverImgHelper" class="form-text text-muted">Add a cover image</small>
+        </div>
+        @error('cover_image')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
 
         <button type="submit" class="btn btn-primary">Submit</button>

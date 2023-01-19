@@ -29,6 +29,8 @@ class StoreProjectRequest extends FormRequest
             'languages' => 'required',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'nullable|exists:technologies,id',
+            'cover_image' => 'nullable|image|max:500'
+
 
         ];
     }

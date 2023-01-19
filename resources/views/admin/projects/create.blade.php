@@ -4,7 +4,7 @@
 
 <h2>add project</h2>
 @include('partials.error')
-<form action="{{route('admin.projects.store')}}" method="POST">
+<form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="title" class="form-label">title</label>
@@ -15,6 +15,22 @@
         {{$message}}
     </div>
     @enderror
+
+
+    <div class="form-group">
+        <label for="cover_image">Cover Image</label>
+        <input type="file" class="form-control-file" name="cover_image" id="cover_image" placeholder="Add a cover_image image" aria-describedby="coverImgHelper">
+        <small id="coverImgHelper" class="form-text text-muted">Add a cover image</small>
+    </div>
+    @error('cover_image')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+
+
+
+
+
+
 
     <div class="mb-3">
         <label for="difficulty" class="form-label">difficulty </label>

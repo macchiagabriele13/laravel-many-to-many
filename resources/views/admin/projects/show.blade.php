@@ -10,7 +10,18 @@
                 <div class="difficulty">
                     price: {{$project->difficulty}}
                 </div>
-                <div>
+
+                <div class="cover_image">
+                    @if($project->cover_image)
+                    <img src="{{asset('storage/' . $project->cover_image )}}" alt="">
+
+                    @else
+                    <div class="placeholder placeholder-md bg-black p-5">
+                        Immagine di default
+                    </div>
+                @endif
+                </div>
+                <div class="languages">
                     language:{{$project->languages}}
                 </div>
                 <div class="type">
